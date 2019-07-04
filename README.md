@@ -42,7 +42,7 @@ Once these amplicons have been sequenced and QTLsurge files created, they can be
   
   ![image](./images/cycle2.png)
   
-  Continue cycling until your confident you've found the true peak and its boundaries.  Depending on the experiment, this doesn't mean your gene is exactly there, but, with a little detective work or help from other tools (see [Gene Sieve](http://genemachine.net/pages/leapFrog.html)), you should be able to find a very strong candidate in the neighborhood.
+  Continue cycling until you're confident you've found the true peak and its boundaries.  Depending on the experiment, this doesn't mean your gene is exactly there, but, with a little detective work or help from other tools (see [Gene Sieve](http://genemachine.net/pages/leapFrog.html)), you should be able to find a very strong candidate in the neighborhood.
 
 
 ## Citation:
