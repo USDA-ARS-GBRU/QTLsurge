@@ -32,18 +32,18 @@ You will start with low-depth (10-30x) sequencing data across the genome convert
 	
 Once a peak is identified and selected, by zooming in, all SNPs in the zoomed area can be exported using the "generate . . . " button.  SNPs will also contain the sliding window average for the window size selected but with an overlap of 1 (every SNP is different).  This file, in conjunction with the VCF file and a genome browsing tool, can be used to design amplicons for border and peak SNPs as well as any number (2-30) intermediate SNPs depending on your ability to multiplex and sequencing platform.
 
-Once these amplicons have been sequenced and QTLsurge files created, they can be loaded using the indicated field.  After reselecting peaks based on this new information (see iQTL-seq Manuscript), the allele frequency information will be overwritten and tagged for those particular SNPs.  (These update values are also used in window calculations, although window calculation become less relevant as cycles progress.) 
+Once these amplicons have been sequenced and QTLsurge files created, they can be loaded using the indicated field.  The raw results will fade and larger, blue points indicate the frequencies attained in amplicon cycles.  These results should allow you to zoom in further on the true peak and, by useing the zoom above, you can capture intervening SNPs.  The exported file will be sorted by position and tagged with the cycle (so some positions will have multiple entries).  Find your peak and borders for most recent cycle and design primers as above.
   
   ![image](./images/cycle1.png)
   
-  After a second cycle, you will combine first and second cycle information together just by copy and pasting in a text editor.  Use Notepad or Text Wrangler but not Word, and make sure to avoid pasting the header. This file can now be loaded in the "amplicon ..." file field.  In theory, you can combine all files and load in the "initial QTL-seq" field, but this file is generally much larger and harder to work with, so we combine everything for you under-the-hood.
+  After a second cycle, you will combine first and second cycle information together by copy and pasting in a text editor.  Use Notepad or Text Wrangler but not Word, and make sure to avoid pasting the header. This file can now be loaded in the "amplicon ..." file field.  In theory, you can combine all files and load in the "initial QTL-seq" field, but this file is generally much larger and harder to work with, so we combine everything for you under-the-hood.
   
   Loading the combined 1st and 2nd cycle files will result in a new set of points.  The largest, darkest points are always the most recent.
   
   ![image](./images/cycle2.png)
   
-  Continue cycling until your confident you've found the true peak and its boundaries.  Depending on the experiment, this doesn't mean your gene is exactly there, but, with a little detective work or halp from other tools (see ), you should be able to find a very strong candidate in the neighborhood.
+  Continue cycling until your confident you've found the true peak and its boundaries.  Depending on the experiment, this doesn't mean your gene is exactly there, but, with a little detective work or help from other tools (see [Gene Sieve](http://genemachine.net/pages/leapFrog.html)), you should be able to find a very strong candidate in the neighborhood.
 
 
 ## Citation:
-comming soon
+coming soon
