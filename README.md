@@ -1,20 +1,18 @@
 # QTLsurge
 Software for iterative genotyping design in a QTL-seq experiment
 
-QTLsurge supplies a visual design platform for the iterative QTL-seq approach. Using biparental large population and low-depth, genes can be discoverd through PCR amplicon iteration.
-
 ## Installation and Implementation:
 
 QTLsurge is designed to be run under RStudio as a Shiny app.  
 
-0. Install dependancies zoo, ggplot2, and shiny unless already installed
-1. Download the R code, QTLsurge.R 
+0. Install dependancies RStudio then zoo, ggplot2, and shiny unless already installed
+1. Download the R code, QTLsurge.R and vcf2freq.R
 2. Open QTLsurge.R in RStudio
 3. Press "Run App" button
 
 ## Required input
 
-QTLsurge requires a tab delimited file containing chromosome ID in the first column, SNP location in the second column, high-bulk allele frequency in the third column, low-bulk allele freqency in the fourth column, and absolute delta SNP value in the fifth column.  Users may run the following pipeline or any tool/pipeline to generate the VCF file from their sequencing data. However, the AD tag should be present. It is not a default tag for most of tools.
+ QTLsurge requires a tab delimited file containing chromosome ID in the first column, SNP location in the second column, high-bulk allele frequency in the third column, low-bulk allele freqency in the fourth column, and absolute delta SNP value in the fifth column.  Users may run the following pipeline or any tool/pipeline to generate the VCF file from their sequencing data. However, the AD tag should be present. It is not a default tag for most of tools. If you are not comfortable with commandline tools, you will want to collaborate with someone in order to generate the input format.  
 
 		#map reads to reference.fa using bwa or bowtie to generate highBulk.bam and lowBulk.bam
         samtools faidx reference.fa #creates index
@@ -22,9 +20,9 @@ QTLsurge requires a tab delimited file containing chromosome ID in the first col
         bcftools call -vc -V indels output.bcf > output_snps.bcf #filter to snps
 		#run desired filtration using bcftools
         bcftools convert output_snps.bcf -o output_snps.vcf #convert to VCF
-		Rscript vcf2freq.R output_snps.vcf highBulk.bam lowBulk.bam frequency_file.txt 0 #supplied as a helper program, converts to QTLsurge format.  The last argument is the cycle you are on.  Use 0 if this is your initial, standard QTL-seq experiment
+		Rscript vcf2freq.R output_snps.vcf highBulk.bam lowBulk.bam frequency_file.txt 0 #vcf2freq.R is supplied as a helper program, converts to QTLsurge format.  The last argument is the cycle you are on.  Use 0 if this is your initial, standard QTL-seq experiment
 
-A testing file (test.freq) is located on the github page.
+A testing file (tests/test.freq) is located on the github page.
  
 ## Running an experiment
 
