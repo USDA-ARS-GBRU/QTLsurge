@@ -17,7 +17,7 @@ QTLsurge is designed to be run under RStudio as a Shiny app.
 ```bash
 #map reads to reference.fa using bwa or bowtie to generate highBulk.bam and lowBulk.bam
 samtools faidx reference.fa #creates index
-samtools mpileup -g -t AD -f reference.fa highBulk.bam lowBulk.bam > output.bcf #calls variants
+samtools mpileup -g -t AD -f reference.fa highBulk.bam lowBulk.bam > output.bcf #calls variants and adds fequency information
 bcftools call -vc -V indels output.bcf > output_snps.bcf #filter to snps
 #run desired filtration using bcftools
 bcftools convert output_snps.bcf -o output_snps.vcf #convert to VCF
