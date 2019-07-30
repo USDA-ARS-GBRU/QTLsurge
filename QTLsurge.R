@@ -77,6 +77,7 @@ server <- function(input, output) {
              sep = "\t",
              quote = "")
     if (is.null(input$cycles)) {
+      d$deltaSNP = abs(d$deltaSNP)
       d[order(d$chr,d$position),]
     } else {
       d2 = read.csv(input$cycles$datapath,
@@ -84,6 +85,7 @@ server <- function(input, output) {
                    sep = "\t",
                    quote = "")
       d <- rbind(d,d2)
+      d$deltaSNP = abs(d$deltaSNP)
       d[order(d$chr,d$position),]
     }
   })
@@ -111,12 +113,12 @@ server <- function(input, output) {
   genomeWide <- reactive({
     d <- df()
     #mean(abs(d$deltaSNP)) 
-    quantile(abs(d$deltaSNP), .95)
+    quantile(d$deltaSNP, .95)
   }) 
   
   winDSNP <- reactive({ 
-    x = rollapply(zoo(abs(dfChrom()$deltaSNP),dfChrom()$position), width = input$winSize, by = input$overlapSize, FUN = mean, align = "center")
-    y = rollapply(zoo(abs(dfChrom()$deltaSNP),dfChrom()$position), width = input$winSize, by = input$overlapSize, FUN = sd, align = "center")
+    x = rollapply(zoo(dfChrom()$deltaSNP,dfChrom()$position), width = input$winSize, by = input$overlapSize, FUN = mean, align = "center")
+    y = rollapply(zoo(dfChrom()$deltaSNP,dfChrom()$position), width = input$winSize, by = input$overlapSize, FUN = sd, align = "center")
     sqWin = sqrt(input$winSize)
     d = as.data.frame(cbind(index(x),coredata(x),coredata(x) + (3*coredata(y)/sqWin),coredata(x) - (3*coredata(y)/sqWin))) #three standard units
   })
@@ -127,7 +129,7 @@ server <- function(input, output) {
     if (is.null(input$cycles)) {
       ggplot() +
         ylim(0, 1) +
-        geom_point(data=dfChrom(), aes(x=position,y=abs(deltaSNP),alpha=cycle),color="grey60") +
+        geom_point(data=dfChrom(), aes(x=position,y=deltaSNP,alpha=cycle),color="grey60") +
         geom_ribbon(data=winDSNP(),aes(x=V1,ymin=V4,ymax=V3),fill = "grey30") +
         geom_line(data=winDSNP(),aes(x=V1,y=V2),color="red") +
         geom_point(data=winDSNP(),aes(x=V1,y=V2),color="red") +
@@ -140,7 +142,7 @@ server <- function(input, output) {
       geom_line(data=winDSNP(),aes(x=V1,y=V2),color="red") +
       geom_point(data=winDSNP(),aes(x=V1,y=V2),color="red") +
       geom_hline(yintercept=genomeWide(), linetype="dashed", color="blue") +
-        geom_point(data=dfChrom(), aes(x=position,y=abs(deltaSNP),color=as.factor(cycle),alpha=cycle,size=cycle)) +
+        geom_point(data=dfChrom(), aes(x=position,y=deltaSNP,color=as.factor(cycle),alpha=cycle,size=cycle)) +
       #scale_color_brewer(palette="Dark2") +  
       scale_color_manual(values=c("grey60", "blue","blue","blue","blue","blue","blue")) +
         #annotate("text", x=maxPos, y=maxSNP, label= as.character(maxPos))
@@ -187,7 +189,7 @@ server <- function(input, output) {
       right = round(ranges$x[2])
       dOut = dfChrom()
       dOut= dOut[which(dOut$position < right & dOut$position > left),]
-      x = rollapply(zoo(abs(dOut$deltaSNP),dOut$position), width = input$winSize, by = 1, FUN = mean, align = "center",fill=NA)
+      x = rollapply(zoo(dOut$deltaSNP,dOut$position), width = input$winSize, by = 1, FUN = mean, align = "center",fill=NA)
       x = coredata(x)
       dOut = cbind(dOut,x)
       colnames(dOut) = c("chrom","pos","lowBulk","highBulk","delta","cycle","windowAverage")
