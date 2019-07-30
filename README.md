@@ -12,7 +12,7 @@ QTLsurge is designed to be run under RStudio as a Shiny app.
 
 ## Required input
 
- QTLsurge requires a tab delimited file containing chromosome ID in the first column, SNP location in the second column, high-bulk allele frequency in the third column, low-bulk allele freqency in the fourth column, and absolute delta SNP value in the fifth column.  Users may run the following pipeline or any tool/pipeline to generate the VCF file from their sequencing data. However, the AD tag should be present. It is not a default tag for most of tools. If you are not comfortable with commandline tools, you will want to collaborate with someone in order to generate the input format.  
+ QTLsurge requires a tab delimited file containing chromosome ID in the first column, SNP location in the second column, high-bulk allele frequency in the third column, low-bulk allele freqency in the fourth column, and absolute delta SNP (difference between high and low frequency) value in the fifth column.  Users may run the following pipeline or any tool/pipeline to generate the VCF file from their sequencing data. However, the AD tag should be present. It is not a default tag for most of tools. If you are not comfortable with commandline tools, you will want to collaborate with someone in order to generate the input format.  
 
 		#map reads to reference.fa using bwa or bowtie to generate highBulk.bam and lowBulk.bam
         samtools faidx reference.fa #creates index
