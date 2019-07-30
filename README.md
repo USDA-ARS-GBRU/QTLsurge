@@ -14,13 +14,13 @@ QTLsurge is designed to be run under RStudio as a Shiny app.
 
  QTLsurge requires a tab delimited file containing chromosome ID in the first column, SNP location in the second column, high-bulk allele frequency in the third column, low-bulk allele freqency in the fourth column, and absolute delta SNP (difference between high and low frequency) value in the fifth column.  Users may run the following pipeline or any tool/pipeline to generate the VCF file from their sequencing data. However, the AD tag should be present. It is not a default tag for most of tools. If you are not comfortable with commandline tools, you will want to collaborate with someone in order to generate the input format.  
 
-		#map reads to reference.fa using bwa or bowtie to generate highBulk.bam and lowBulk.bam
+	#map reads to reference.fa using bwa or bowtie to generate highBulk.bam and lowBulk.bam
         samtools faidx reference.fa #creates index
         samtools mpileup -g -t AD -f reference.fa highBulk.bam lowBulk.bam > output.bcf #calls variants
         bcftools call -vc -V indels output.bcf > output_snps.bcf #filter to snps
-		#run desired filtration using bcftools
+	#run desired filtration using bcftools
         bcftools convert output_snps.bcf -o output_snps.vcf #convert to VCF
-		Rscript vcf2freq.R output_snps.vcf highBulk.bam lowBulk.bam frequency_file.txt 0 #vcf2freq.R is supplied as a helper program, converts to QTLsurge format.  The last argument is the cycle you are on.  Use 0 if this is your initial, standard QTL-seq experiment
+	Rscript vcf2freq.R output_snps.vcf highBulk.bam lowBulk.bam frequency_file.txt 0 #vcf2freq.R is supplied as a helper program, converts to QTLsurge format.  The last argument is the cycle you are on.  Use 0 if this is your initial, standard QTL-seq experiment
 
 A testing file (tests/test.freq) is located on the github page.
  
@@ -36,7 +36,7 @@ Once these amplicons have been sequenced and QTLsurge files created, they can be
   
   ![image](./images/cycle1.png)
   
-  After a second cycle, you will combine first and second cycle information together by copy and pasting in a text editor.  Use Notepad or Text Wrangler but not Word, and make sure to avoid pasting the header. This file can now be loaded in the "amplicon ..." file field.  In theory, you can combine all files and load in the "initial QTL-seq" field, but this file is generally much larger and harder to work with, so we combine everything for you under-the-hood.
+  After a second cycle, you will combine first and second cycle information together by copy and pasting in a text editor.  Use Notepad or Text Wrangler but not Word, and make sure to avoid pasting the header when adding to your previous cycle file. This file can now be loaded in the "amplicon ..." file field.  In theory, you can combine all files and load in the "initial QTL-seq" field, but this file is generally much larger and harder to work with, so we combine everything for you under-the-hood.
   
   Loading the combined 1st and 2nd cycle files will result in a new set of points.  The largest, darkest points are always the most recent.
   
