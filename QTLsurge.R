@@ -60,8 +60,8 @@ ui <- fluidPage(
 server <- function(input, output) {
   options(shiny.maxRequestSize=50*1024^2) 
   
-  url1 <- a("QTL-seq file format description and example", href="https://www.google.com/")
-  url2 <- a("Cycle file format description and example", href="https://www.google.com/")
+  url1 <- a("QTL-seq file format description and example", href="https://github.com/USDA-ARS-GBRU/QTLsurge/edit/master/QTLsurge.R/test")
+  url2 <- a("Cycle file format description and example", href="https://github.com/USDA-ARS-GBRU/QTLsurge/edit/master/QTLsurge.R/test")
   output$tab <- renderUI({
     tagList(url1)
   })
