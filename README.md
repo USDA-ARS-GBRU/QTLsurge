@@ -22,7 +22,7 @@ QTLsurge is designed to be run under RStudio as a Shiny app.
         bcftools convert output_snps.bcf -o output_snps.vcf #convert to VCF
 	Rscript vcf2freq.R output_snps.vcf highBulk.bam lowBulk.bam frequency_file.txt 0 #vcf2freq.R is supplied as a helper program, converts to QTLsurge format.  The last argument is the cycle you are on.  Use 0 if this is your initial, standard QTL-seq experiment
 
-A testing file (tests/test.freq) is located on the github page.
+A testing file (test/test.freq) is located on the github page.
  
 ## Running an experiment
 
