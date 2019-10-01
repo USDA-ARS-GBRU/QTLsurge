@@ -6,7 +6,7 @@ Software for iterative genotyping design in a QTL-seq experiment
 QTLsurge is designed to be run under RStudio as a Shiny app.  
 
 0. Install dependancies: [RStudio](https://www.rstudio.com/products/rstudio/download/) then, using Rstudio package manager, install zoo, ggplot2, and shiny libraries.
-1. Download the R code: QTLsurge.R and vcf2freq.R
+1. Download the R code: QTLsurge.R and vcf2freq.pl
 2. Open QTLsurge.R in RStudio
 3. Press "Run App" button
 
@@ -21,7 +21,7 @@ samtools mpileup -g -t AD -f reference.fa highBulk.bam lowBulk.bam > output.bcf 
 bcftools call -vc -V indels output.bcf > output_snps.bcf #filter to snps
 #run desired filtration using bcftools
 bcftools convert output_snps.bcf -o output_snps.vcf #convert to VCF
-Rscript vcf2freq.R output_snps.vcf highBulk.bam lowBulk.bam frequency_file.txt 0 #vcf2freq.R is supplied as a helper program, converts to QTLsurge format.  The last argument is the cycle you are on.  Use 0 if this is your initial, standard QTL-seq experiment
+perl vcf2freq.pl output_snps.vcf 0 >output_frequency_file.txt #vcf2freq.pl is supplied as a helper program, converts to QTLsurge format.  The last argument is the cycle you are on.  Use 0 if this is your initial, standard QTL-seq experiment
 ```
 
 A testing file (test/test.freq) is located on the github page.
