@@ -21,7 +21,7 @@ samtools mpileup -g -t AD -f reference.fa highBulk.bam lowBulk.bam > output.bcf 
 bcftools call -vc -V indels output.bcf > output_snps.bcf #filter to snps
 #run desired filtration using bcftools
 bcftools convert output_snps.bcf -o output_snps.vcf #convert to VCF
-perl vcf2freq.pl output_snps.vcf 0 >output_frequency_file.txt #vcf2freq.pl is supplied as a helper program, converts to QTLsurge format.  The last argument is the cycle you are on.  Use 0 if this is your initial, standard QTL-seq experiment
+perl vcf2freq.pl output_snps.vcf 0 >output_frequency_file.txt #vcf2freq.pl is supplied as a helper program, converts to QTLsurge format.  The last argument is the cycle you are on.  Use 0 if this is your initial, standard QTL-seq experiment.  This script is not robust to variation in genotype format and only accepts "GT:PL:AD" format that results from this pipeline.
 ```
 
 A testing file (test/test.freq) is located on the github page.
