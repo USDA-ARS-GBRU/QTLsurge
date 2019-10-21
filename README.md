@@ -6,9 +6,10 @@ Software for iterative genotyping design in a QTL-seq experiment
 QTLsurge is designed to be run under RStudio as a Shiny app.  
 
 0. Install dependancies: [RStudio](https://www.rstudio.com/products/rstudio/download/) then, using Rstudio package manager, install zoo, ggplot2, and shiny libraries.
-1. Download the R code: QTLsurge.R and vcf2freq.pl
-2. Open QTLsurge.R in RStudio
-3. Press "Run App" button
+1. Download the R code using "Clone or download" button; "Download ZIP"
+2. Unzip the file in the location of your choice
+3. Open QTLsurge.R in RStudio
+4. Press "Run App" button
 
 ## Required input
 
