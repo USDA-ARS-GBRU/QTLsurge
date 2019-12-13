@@ -13,12 +13,12 @@ QTLsurge is designed to be run under RStudio as a Shiny app.
 
 ## Required input
 
- QTLsurge requires a tab delimited file containing chromosome ID in the first column, SNP location in the second column, high-bulk allele frequency in the third column, low-bulk allele freqency in the fourth column, deltaSNP (difference between high and low frequency) value in the fifth column, and cycle number in sixth column (see test/test.freq).  Regardless of sign, all deltaSNP values are converted to absolute values for plotting and window calculation.  Users may run the following pipeline or any tool/pipeline to generate the VCF file from their sequencing data. However, the AD tag should be present. It is not a default tag for most of tools. If you are not comfortable with commandline tools, you will want to collaborate with someone in order to generate the input format.  
+ QTLsurge requires a tab delimited file containing chromosome ID in the first column, SNP location in the second column, high-bulk allele frequency in the third column, low-bulk allele freqency in the fourth column, deltaSNP (difference between high and low frequency) value in the fifth column, and cycle number in sixth column (see test/test.freq).  Regardless of sign, all deltaSNP values are converted to absolute values for plotting and window calculation.  Users may run the following pipeline or any tool/pipeline to generate the VCF file from their sequencing data. However, the AD tag should be present. It is not a default tag for most tools. If you are not comfortable with command line tools, you will want to collaborate with someone in order to generate the input format.  
 
 ```bash
 #map reads to reference.fa using bwa or bowtie to generate highBulk.bam and lowBulk.bam
 samtools faidx reference.fa #creates index
-bcftools mpileup --threads 8 -Ou -a AD -f reference.fa highBulk.bam lowBulk.bam > output.bcf #calls variants and adds fequency information
+bcftools mpileup -Ou -a AD -f reference.fa highBulk.bam lowBulk.bam > output.bcf #calls variants and adds fequency information
 bcftools call -vc -V indels -O v output.bcf > output_snps.vcf #extract snps
 
 #The inclusion of repeats in your experiment can dramatically reduce your signal strength; therefore, poor mapping quality and excess depth of coverage are two key features to filter on.  So the next step is optional but something like it is highly recommended
