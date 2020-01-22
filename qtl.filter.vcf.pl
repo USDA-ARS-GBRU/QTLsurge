@@ -32,7 +32,7 @@ my $max_pop2_depth;
 my $max_par1_depth;
 my $max_par2_depth;
 my $depth_factor = 2;
-my $min_depth = 5;
+my $min_depth = 10;
 my $max_depth;
 my $min_qual = 50;
 my $min_mq = 50;
@@ -487,8 +487,8 @@ sub parse_args {
 		}
 	}
 
-	if (defined($min_depth) && $min_depth < 0) {
-		&arg_error('minimum depth must be >= 0');
+	if (defined($min_depth) && $min_depth < 1) {
+		&arg_error('minimum depth must be >= 1');
 	}
 
 	if (defined($max_depth) && $max_depth <= 0) {
@@ -565,7 +565,7 @@ qtl.filter.vcf.pl filters a VCF file for further QTL processing. The VCF file mu
 
  --par2_name     parent 2 name as defined in VCF header
 
- --min_depth     minimum depth, supercedes other depth filters (default: 5)
+ --min_depth     minimum depth, supercedes other depth filters (default: 10)
 
  --max_depth     maximum depth, supercedes other depth filters (default: no max)
 
