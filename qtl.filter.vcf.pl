@@ -229,24 +229,25 @@ while (my $line = <VCF>) {
 
 	my $ratio_fail = 0;
 
-	my @pop1_ads = split(',', $pop1_ad);
-	my @pop2_ads = split(',', $pop2_ad);
+	if (defined($pop_ratio_filter)) {
+		my @pop1_ads = split(',', $pop1_ad);
+		my @pop2_ads = split(',', $pop2_ad);
 
-	foreach my $index (0..$#pop1_ads) {
-		if ($ratio_fail == 1) {
-			next();
+		foreach my $index (0..$#pop1_ads) {
+			if ($ratio_fail == 1) {
+				next();
+			}
+
+			my $pop1_ratio = $pop1_ads[$index] / $pop1_depth * 100;
+			my $pop2_ratio = $pop2_ads[$index] / $pop2_depth * 100;
+
+			if ($pop1_ratio > 95 && $pop2_ratio > 95) {
+				$high_pop_ratio++;
+				$ratio_fail = 1;
+
+				next();
+			}
 		}
-
-		my $pop1_ratio = $pop1_ads[$index] / $pop1_depth * 100;
-		my $pop2_ratio = $pop2_ads[$index] / $pop2_depth * 100;
-
-		if ($pop1_ratio > 95 && $pop2_ratio > 95) {
-			$high_pop_ratio++;
-			$ratio_fail = 1;
-
-			next();
-		}
-
 	}
 
 	if ($ratio_fail == 1) {
