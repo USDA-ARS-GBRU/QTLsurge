@@ -42,7 +42,7 @@ while (my $l = <IN>) {
 	my $element; 
 	if (rand() < .5) { 
 		$element = 0;
-	else {$element = 1;}
+	} else {$element = 1;}
 	foreach (@s) {
 		my @s2 = split /\:/, $_;
 		my @s3 = split /\,/, $s2[2];
