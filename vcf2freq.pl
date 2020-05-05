@@ -38,15 +38,21 @@ while (my $l = <IN>) {
 	my @fields = splice(@s,0,9);
 	my @toPrint = ($chrom,$pos);
 	my $zero = 0;
+	#randomly choose reference to work across bulks, avoids consensus bias
+	my $element; 
+	if (rand() < .5) { 
+		$element = 0;
+	else {$element = 1;}
 	foreach (@s) {
 		my @s2 = split /\:/, $_;
 		my @s3 = split /\,/, $s2[2];
 		#skips lines without sum
-		if ($s3[0] + $s3[1] == 0) {
+		my $total = $s3[0] + $s3[1]; 
+		if ($total == 0) {
 			$zero = 1;
 			last;
 		}
-		my $freq = $s3[0] / ($s3[0] + $s3[1]);
+		my $freq = $s3[$element] / $total;
 		push(@toPrint, $freq);
 	}
 	next if $zero;
