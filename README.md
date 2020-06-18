@@ -24,10 +24,10 @@ bcftools call -vc -V indels -O v output.bcf > output_snps.vcf #extract snps
 #The inclusion of repeats in your experiment can dramatically reduce your signal strength; therefore, poor mapping quality and excess depth of coverage are two key features to filter on.  So the next step is optional but something like it is highly recommended
 #!!!If running additional cycles of amplicon sequenceing, this step should be skipped or modified to reflect higher expected coverage!!!
 #Run ./qtl.filter.vcf.pl -help for a full list of program options, additional filtering options are available. If your vcf file includes the bulk parents, qtl.filter.vcf.pl can use them to filter SNPs where parents are heterozygous or not polymorphic.
-./qtl.filter.vcf.pl -v output_snps.vcf -o output_qtl_snps --pop1_name highBulk --pop2_name lowBulk --min_depth 5 --max_depth 60 --qual 50 --mq 50 --pop_ratio
+/path/to/QTLsurge/qtl.filter.vcf.pl -v output_snps.vcf -o output_qtl_snps --pop1_name highBulk --pop2_name lowBulk --min_depth 5 --max_depth 60 --qual 50 --mq 50 --pop_ratio
 
 #vcf2freq.pl is supplied as a helper program, converts to QTLsurge format.  The last argument is the cycle you are on.  Use 0 if this is your initial, standard QTL-seq experiment.  This script is not robust to variation in genotype format and only accepts "GT:PL:AD" format that results from this pipeline.
-perl vcf2freq.pl output_qtl_snps.vcf 0 > output_frequency_file.txt
+perl /path/to/QTLsurge/vcf2freq.pl output_qtl_snps.vcf 0 > output_frequency_file.txt
 ```
 
 A testing file (test/test.freq) is located on the github page.
