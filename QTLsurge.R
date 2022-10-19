@@ -21,7 +21,8 @@ ui <- fluidPage(
                            ".csv")),
       uiOutput("tab"),
       tags$hr(),
-      numericInput("chrom", "chromosome to view (sorted and indexed as text!)", value = 1),
+      textInput("chrom", "specify chromosome to view; must be exact name", value = NA),
+      #numericInput("chrom", "chromosome to view (sorted and indexed as text!)", value = 1),
       #numericInput("winSize", "window size", value = 200),
       sliderInput("winSize", "window size (in number of snps)",min=10,max=500,value=200),
       sliderInput("overlapSize", "window overlap (in number of snps); use larger values for whole chromosome views",min=1,max=50,value=50),
@@ -45,9 +46,10 @@ ui <- fluidPage(
       h6("(SNPs above and below view will also be included in download)"),
       # Output: Data file ----
       #verbatimTextOutput(outputId ="temp"),
-      plotOutput(outputId = "plot01", width = "1200px", height = "600px",dblclick = "plot01_dblclick",click="plot01_click",brush = brushOpts(id = "plot01_brush",resetOnNew = TRUE)),tags$head(tags$style(HTML("#info{font-size: 10px;}")))
-      #plotOutput(outputId = "plot02", width = "1200px", height = "600px",dblclick = "plot02_dblclick",click="plot02_click",brush = brushOpts(id = "plot02_brush",resetOnNew = TRUE)),tags$head(tags$style(HTML("#info{font-size: 10px;}")))
-      
+      plotOutput(outputId = "plot01", width = "1200px", height = "600px",dblclick = "plot01_dblclick",click="plot01_click",brush = brushOpts(id = "plot01_brush",resetOnNew = TRUE)),tags$head(tags$style(HTML("#info{font-size: 10px;}"))),
+     #  plotOutput(outputId = "plot02", width = "1200px", height = "600px",dblclick = "plot02_dblclick",click="plot02_click",brush = brushOpts(id = "plot02_brush",resetOnNew = TRUE)),tags$head(tags$style(HTML("#info{font-size: 10px;}")))
+      #tableOutput(outputId ="contents"),
+      verbatimTextOutput(outputId = "test")
     )
   )
   
@@ -92,8 +94,8 @@ server <- function(input, output) {
   
   dfChrom <- reactive({
     d <- df()
-    levels = levels(d$chr)
-    d[which(d$chr == levels[input$chrom]),]  
+    lev = levels(d$chr)
+    d[which(d$chr == as.character(input$chrom)),]  #levels[input$chrom]
   })
   
   # dfCycles <- reactive({
@@ -197,10 +199,11 @@ server <- function(input, output) {
     }
   )
   
+  output$test <- renderText({return(dfChrom())})
   
-  output$contents <- renderTable({
-    return(head(dfChrom()))
-  })
+  #output$contents <- renderTable({
+  #  return(head(dfChrom()))
+  #})
   
   
   
