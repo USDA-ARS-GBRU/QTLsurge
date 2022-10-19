@@ -49,7 +49,7 @@ ui <- fluidPage(
       plotOutput(outputId = "plot01", width = "1200px", height = "600px",dblclick = "plot01_dblclick",click="plot01_click",brush = brushOpts(id = "plot01_brush",resetOnNew = TRUE)),tags$head(tags$style(HTML("#info{font-size: 10px;}"))),
      #  plotOutput(outputId = "plot02", width = "1200px", height = "600px",dblclick = "plot02_dblclick",click="plot02_click",brush = brushOpts(id = "plot02_brush",resetOnNew = TRUE)),tags$head(tags$style(HTML("#info{font-size: 10px;}")))
       #tableOutput(outputId ="contents"),
-      verbatimTextOutput(outputId = "test")
+      #verbatimTextOutput(outputId = "test")
     )
   )
   
@@ -94,7 +94,7 @@ server <- function(input, output) {
   
   dfChrom <- reactive({
     d <- df()
-    lev = levels(d$chr)
+    #lev = levels(d$chr)
     d[which(d$chr == as.character(input$chrom)),]  #levels[input$chrom]
   })
   
@@ -199,7 +199,7 @@ server <- function(input, output) {
     }
   )
   
-  output$test <- renderText({return(dfChrom())})
+  #output$test <- renderText({return(dfChrom())})
   
   #output$contents <- renderTable({
   #  return(head(dfChrom()))
