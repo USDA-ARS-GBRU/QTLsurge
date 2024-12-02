@@ -54,4 +54,4 @@ Once these amplicons have been sequenced and QTLsurge files created, they can be
 
 
 ## Citation:
-coming soon
+[Agile Genetics: Single gene resolution without the fuss](https://onlinelibrary.wiley.com/doi/full/10.1002/bies.202300206)
